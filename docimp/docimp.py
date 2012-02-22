@@ -1,27 +1,28 @@
 #!/usr/bin/env python
 
-# Import documents into CouchDB
-
-# TODO: Create settings.py
+# Import a range of documents into CouchDB from a remote url / generator
 
 from datetime import datetime
 
 from couchdbkit import Server
 from couchdbkit.schema import *
 
+from settings import *
+
+# CouchDB Document object
 class ImageDoc(Document):
     date = DateTimeProperty(default=datetime.utcnow)
 
-server = Server('http://192.168.1.124:5984')
-db = server.get_or_create_db("pdfs")
+server = Server(COUCH_SERVER_URL)
+db = server.get_or_create_db(COUCH_DATABASE_NAME)
 
 ImageDoc._db = db
 
-
+# Main function loop
 import urllib2
 import sys
 
-base_url = 'http://localhost:8000/pdf/'
+base_url = DOCMK_URL
 
 nstart = int(sys.argv[1])
 nend = int(sys.argv[2])

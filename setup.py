@@ -5,5 +5,6 @@ from distutils.core import setup
 setup(name='docimp',
       version='1.0',
       url='https://github.com/macropin/docimp',
-      install_requires = ["couchdbkit",],
+      packages=['docimp',],
+      install_requires=['couchdbkit',],
      )
